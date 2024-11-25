@@ -16,6 +16,18 @@ public class Turma {
     @Column
     private Integer semestre;
 
+    @ManyToOne
+    @JoinColumn(name = "curso_id", referencedColumnName = "id")
+    private Curso curso;
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
     public Integer getId() {
         return id;
     }
