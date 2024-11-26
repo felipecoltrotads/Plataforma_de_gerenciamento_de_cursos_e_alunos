@@ -23,6 +23,10 @@ public class Curso {
     @JsonIgnoreProperties("curso")
     private List<Turma> turmas;
 
+    @OneToMany(mappedBy = "curso")
+    @JsonIgnoreProperties("curso")
+    private List<Disciplina> displinas;
+
     public List<Turma> getTurmas() {
         return turmas;
     }
@@ -61,5 +65,13 @@ public class Curso {
 
     public void setCarga_horaria(Integer carga_horaria) {
         this.carga_horaria = carga_horaria;
+    }
+
+    public List<Disciplina> getDisplinas() {
+        return displinas;
+    }
+
+    public void setDisplinas(List<Disciplina> displinas) {
+        this.displinas = displinas;
     }
 }
