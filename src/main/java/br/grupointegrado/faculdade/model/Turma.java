@@ -20,14 +20,6 @@ public class Turma {
     @JoinColumn(name = "curso_id", referencedColumnName = "id")
     private Curso curso;
 
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -50,5 +42,13 @@ public class Turma {
 
     public void setSemestre(Integer semestre) {
         this.semestre = semestre;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 }

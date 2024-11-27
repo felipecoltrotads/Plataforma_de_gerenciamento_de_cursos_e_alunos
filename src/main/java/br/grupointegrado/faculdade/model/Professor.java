@@ -63,4 +63,12 @@ public class Professor {
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
     }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
 }

@@ -27,14 +27,6 @@ public class Curso {
     @JsonIgnoreProperties("curso")
     private List<Disciplina> displinas;
 
-    public List<Turma> getTurmas() {
-        return turmas;
-    }
-
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -65,6 +57,14 @@ public class Curso {
 
     public void setCarga_horaria(Integer carga_horaria) {
         this.carga_horaria = carga_horaria;
+    }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
     }
 
     public List<Disciplina> getDisplinas() {
