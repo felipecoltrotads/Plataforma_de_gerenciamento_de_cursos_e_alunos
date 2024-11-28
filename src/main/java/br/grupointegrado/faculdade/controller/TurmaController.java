@@ -33,6 +33,7 @@ public class TurmaController {
         Turma turma = new Turma();
         turma.setAno(dto.ano());
         turma.setSemestre(dto.semestre());
+        turma.setCurso(dto.curso_id());
         this.repository.save(turma);
 
         return ResponseEntity.ok(turma);
@@ -45,6 +46,7 @@ public class TurmaController {
 
         turma.setAno(dto.ano());
         turma.setSemestre(dto.semestre());
+        turma.setCurso(dto.curso_id());
         this.repository.save(turma);
 
         return ResponseEntity.ok(turma);

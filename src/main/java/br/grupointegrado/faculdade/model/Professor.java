@@ -20,10 +20,6 @@ public class Professor {
     @Column
     private String especialidade;
 
-    @OneToMany(mappedBy = "professor")
-    @JsonIgnoreProperties("professor")
-    private List<Disciplina> disciplinas;
-
     public Integer getId() {
         return id;
     }
@@ -64,11 +60,4 @@ public class Professor {
         this.especialidade = especialidade;
     }
 
-    public List<Disciplina> getDisciplinas() {
-        return disciplinas;
-    }
-
-    public void setDisciplinas(List<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
-    }
 }
