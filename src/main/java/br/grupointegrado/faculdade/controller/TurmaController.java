@@ -1,7 +1,11 @@
 package br.grupointegrado.faculdade.controller;
 
 import br.grupointegrado.faculdade.dto.TurmaRequestDTO;
+import br.grupointegrado.faculdade.model.Curso;
+import br.grupointegrado.faculdade.model.Disciplina;
+import br.grupointegrado.faculdade.model.Professor;
 import br.grupointegrado.faculdade.model.Turma;
+import br.grupointegrado.faculdade.repository.CursoRepository;
 import br.grupointegrado.faculdade.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -59,6 +63,5 @@ public class TurmaController {
         this.repository.delete(turma);
         return ResponseEntity.noContent().build();
     }
-
 
 }
