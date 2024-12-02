@@ -20,11 +20,11 @@ public class Nota {
 
     @ManyToOne
     @JoinColumn(name = "matricula_id", referencedColumnName = "id")
-    private Curso curso;
+        private Matricula matricula;
 
     @ManyToOne
     @JoinColumn(name = "disciplina_id", referencedColumnName = "id")
-    private Professor professor;
+    private Disciplina disciplina;
 
     public Integer getId() {
         return id;
@@ -50,19 +50,19 @@ public class Nota {
         this.data_lancamento = data_lancamento;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public Matricula getMatricula() {
+        return matricula;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setMatricula(Matricula matricula) {
+        this.matricula = matricula;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public Disciplina getDisciplina() {
+        return disciplina;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 }
