@@ -1,11 +1,14 @@
 package br.grupointegrado.faculdade.controller;
 
+import br.grupointegrado.faculdade.dto.DisciplinaRequestDTO;
 import br.grupointegrado.faculdade.dto.ProfessorRequestDTO;
 import br.grupointegrado.faculdade.model.Curso;
 import br.grupointegrado.faculdade.model.Disciplina;
 import br.grupointegrado.faculdade.model.Professor;
+import br.grupointegrado.faculdade.repository.CursoRepository;
 import br.grupointegrado.faculdade.repository.DisciplinaRepository;
 import br.grupointegrado.faculdade.repository.ProfessorRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,8 @@ public class ProfessorController {
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
+    private CursoRepository cursoRepository;
+
     @GetMapping
     public ResponseEntity<List<Professor>> findAll(){
         return ResponseEntity.ok(this.repository.findAll());
@@ -33,7 +38,7 @@ public class ProfessorController {
         return ResponseEntity.ok(professor);
     }
     @PostMapping
-    public ResponseEntity<Professor> save(@RequestBody ProfessorRequestDTO dto) {
+    public ResponseEntity<Professor> save(@Valid @RequestBody ProfessorRequestDTO dto) {
         Professor professor  = new Professor();
         professor.setNome(dto.nome());
         professor.setEmail(dto.email());
@@ -44,7 +49,7 @@ public class ProfessorController {
         return ResponseEntity.ok(professor);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Professor> update(@PathVariable Integer id,
+    public ResponseEntity<Professor> update(@Valid @PathVariable Integer id,
                         @RequestBody ProfessorRequestDTO dto){
         Professor professor = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Professor não encontrado"));
@@ -67,12 +72,21 @@ public class ProfessorController {
     }
 
     @PostMapping("/{id}/add-disciplina")
-    public ResponseEntity<Professor> addDisplina(@PathVariable Integer id,
-                                             @RequestBody Disciplina disciplina){
-        Professor professor = this.repository.findById(id)
+    public ResponseEntity<Professor> addDisciplina(@PathVariable Integer id, @RequestBody DisciplinaRequestDTO dto) {
+
+        Professor professor = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Professor não encontrado"));
+
+        Curso curso = cursoRepository.findById(dto.curso_id())
+                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
+
+        Disciplina disciplina = new Disciplina();
+        disciplina.setNome(dto.nome());
+        disciplina.setCodigo(dto.codigo());
         disciplina.setProfessor(professor);
-        this.disciplinaRepository.save(disciplina);
+        disciplina.setCurso(curso);
+
+        disciplinaRepository.save(disciplina);
 
         return ResponseEntity.ok(professor);
     }

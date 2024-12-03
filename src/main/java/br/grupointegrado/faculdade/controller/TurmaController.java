@@ -2,8 +2,6 @@ package br.grupointegrado.faculdade.controller;
 
 import br.grupointegrado.faculdade.dto.TurmaRequestDTO;
 import br.grupointegrado.faculdade.model.Curso;
-import br.grupointegrado.faculdade.model.Disciplina;
-import br.grupointegrado.faculdade.model.Professor;
 import br.grupointegrado.faculdade.model.Turma;
 import br.grupointegrado.faculdade.repository.CursoRepository;
 import br.grupointegrado.faculdade.repository.TurmaRepository;
@@ -20,6 +18,9 @@ public class TurmaController {
     @Autowired
     private TurmaRepository repository;
 
+    @Autowired
+    private CursoRepository cursoRepository;
+
     @GetMapping
     public ResponseEntity<List<Turma>> findAll(){
         return ResponseEntity.ok(this.repository.findAll());
@@ -34,10 +35,12 @@ public class TurmaController {
     }
     @PostMapping
     public ResponseEntity<Turma> save(@RequestBody TurmaRequestDTO dto) {
+        Curso curso = cursoRepository.findById(dto.curso_id())
+                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
         Turma turma = new Turma();
         turma.setAno(dto.ano());
         turma.setSemestre(dto.semestre());
-        turma.setCurso(dto.curso_id());
+        turma.setCurso(curso);
         this.repository.save(turma);
 
         return ResponseEntity.ok(turma);
@@ -47,10 +50,12 @@ public class TurmaController {
                                             @RequestBody TurmaRequestDTO dto){
         Turma turma = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Turma não encontrado"));
+        Curso curso = cursoRepository.findById(dto.curso_id())
+                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
 
         turma.setAno(dto.ano());
         turma.setSemestre(dto.semestre());
-        turma.setCurso(dto.curso_id());
+        turma.setCurso(curso);
         this.repository.save(turma);
 
         return ResponseEntity.ok(turma);

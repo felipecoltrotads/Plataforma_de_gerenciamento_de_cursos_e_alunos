@@ -27,6 +27,14 @@ public class Turma {
     @JsonIgnoreProperties("turma")
     private List<Matricula> matriculas;
 
+    @PrePersist
+    @PreUpdate
+    private void validarSemestre() {
+        if (semestre != 1 && semestre != 2) {
+            throw new IllegalArgumentException("O semestre deve ser 1 ou 2.");
+        }
+    }
+
     public Integer getId() {
         return id;
     }
@@ -66,4 +74,5 @@ public class Turma {
     public void setMatriculas(List<Matricula> matriculas) {
         this.matriculas = matriculas;
     }
+
 }

@@ -7,6 +7,7 @@ import br.grupointegrado.faculdade.model.Turma;
 import br.grupointegrado.faculdade.repository.CursoRepository;
 import br.grupointegrado.faculdade.repository.DisciplinaRepository;
 import br.grupointegrado.faculdade.repository.TurmaRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class CursoController {
             return ResponseEntity.ok(curso);
         }
         @PostMapping
-        public ResponseEntity<Curso> save(@RequestBody CursoRequestDTO dto) {
+        public ResponseEntity<Curso> save(@Valid @RequestBody CursoRequestDTO dto) {
             Curso curso = new Curso();
             curso.setNome(dto.nome());
             curso.setCodigo(dto.codigo());
@@ -47,7 +48,7 @@ public class CursoController {
             return ResponseEntity.ok(curso);
         }
         @PutMapping("/{id}")
-        public ResponseEntity<Curso> update(@PathVariable Integer id,
+        public ResponseEntity<Curso> update(@Valid @PathVariable Integer id,
                             @RequestBody CursoRequestDTO dto){
             Curso curso = this.repository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
@@ -79,16 +80,16 @@ public class CursoController {
             return ResponseEntity.ok(curso);
         }
 
-    @PostMapping("/{id}/add-disciplina")
-    public ResponseEntity<Curso> addDisplina(@PathVariable Integer id,
+        @PostMapping("/{id}/add-disciplina")
+        public ResponseEntity<Curso> addDisciplina(@PathVariable Integer id,
                                           @RequestBody Disciplina disciplina){
-        Curso curso = this.repository.findById(id)
+            Curso curso = this.repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
-        disciplina.setCurso(curso);
-        this.disciplinaRepository.save(disciplina);
+            disciplina.setCurso(curso);
+            this.disciplinaRepository.save(disciplina);
 
-        return ResponseEntity.ok(curso);
-    }
+            return ResponseEntity.ok(curso);
+        }
 
 
 }

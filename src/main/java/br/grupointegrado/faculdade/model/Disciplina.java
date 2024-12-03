@@ -3,7 +3,7 @@ package br.grupointegrado.faculdade.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "displinas")
+@Table(name = "disciplinas")
 public class Disciplina {
 
     @Id
