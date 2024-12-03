@@ -1,5 +1,6 @@
 package br.grupointegrado.faculdade.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -20,10 +21,12 @@ public class Nota {
 
     @ManyToOne
     @JoinColumn(name = "matricula_id", referencedColumnName = "id")
-        private Matricula matricula;
+    @JsonBackReference
+    private Matricula matricula;
 
     @ManyToOne
     @JoinColumn(name = "disciplina_id", referencedColumnName = "id")
+    @JsonBackReference
     private Disciplina disciplina;
 
     public Integer getId() {
