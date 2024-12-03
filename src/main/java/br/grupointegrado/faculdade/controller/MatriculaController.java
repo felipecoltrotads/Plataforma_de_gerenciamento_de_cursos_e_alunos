@@ -68,21 +68,21 @@ public class MatriculaController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/aluno/{alunoId}/boletim")
+    @GetMapping("/aluno/{aluno_id}/boletim")
     public ResponseEntity<List<Nota>> getBoletim(@PathVariable Integer aluno_id) {
-        List<Nota> notas = notaRepository.findByMatricula_Aluno_Id(aluno_id);
+        List<Nota> notas = notaRepository.findByMatricula_Aluno_id(aluno_id);
         return ResponseEntity.ok(notas);
     }
 
-    @GetMapping("/turma/{turmaId}/desempenho")
+    @GetMapping("/turma/{turma_id}/desempenho")
     public ResponseEntity<List<Nota>> getDesempenhoPorTurma(@PathVariable Integer turma_id) {
-        List<Nota> notas = notaRepository.findByMatricula_Turma_Id(turma_id);
+        List<Nota> notas = notaRepository.findByMatricula_Turma_id(turma_id);
         return ResponseEntity.ok(notas);
     }
 
-    @GetMapping("/disciplina/{disciplinaId}/desempenho")
+    @GetMapping("/disciplina/{disciplina_id}/desempenho")
     public ResponseEntity<List<Nota>> getDesempenhoPorDisciplina(@PathVariable Integer disciplina_id) {
-        List<Nota> notas = notaRepository.findByDisciplina_Id(disciplina_id);
+        List<Nota> notas = notaRepository.findByDisciplina_id(disciplina_id);
         return ResponseEntity.ok(notas);
     }
 
